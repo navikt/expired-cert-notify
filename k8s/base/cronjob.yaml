@@ -14,6 +14,7 @@ spec:
     spec:
       template:
         spec:
+          restartPolicy: Never
           containers:
           - name: expired-cert-notify
             image: europe-north1-docker.pkg.dev/knada-gcp/knada-north/expired-cert-notify
