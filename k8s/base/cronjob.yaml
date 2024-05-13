@@ -26,13 +26,13 @@ spec:
                 value: /etc/pki/tls/certs/ca-bundle-crt
               - name: SLACK_CHANNEL_ID
                 value: C06SBUR61JS
-          volumeMounts:
-          - mountPath: /etc/pki/tls/certs/ca-bundle.crt
+            volumeMounts:
+            - mountPath: /etc/pki/tls/certs/ca-bundle.crt
+              name: ca-bundle-pem
+              readOnly: true
+              subPath: ca-bundle.pem
+          volumes:
+          - configMap:
+              defaultMode: 420
+              name: ca-bundle-pem
             name: ca-bundle-pem
-            readOnly: true
-            subPath: ca-bundle.pem
-        volumes:
-        - configMap:
-            defaultMode: 420
-            name: ca-bundle-pem
-          name: ca-bundle-pem
