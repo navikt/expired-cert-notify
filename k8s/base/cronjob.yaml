@@ -5,7 +5,6 @@ metadata:
   namespace: knada-system
 spec:
   schedule: "0 9 * * *"
-  ttlSecondsAfterFinished: 340
   backoffLimit: 2
   successfulJobsHistoryLimit: 1
   failedJobsHistoryLimit: 1
