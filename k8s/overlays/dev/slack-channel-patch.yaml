@@ -1,0 +1,15 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: expired-cert-notify
+  namespace: knada-system
+spec:
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: expired-cert-notify
+            env:
+              - name: SLACK_CHANNEL_ID
+                value: C06SBUR61JS

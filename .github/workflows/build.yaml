@@ -38,3 +38,21 @@ jobs:
         context: .
         push: true
         tags: ${{ env.IMAGE }}
+    - name: Update imagetag in dev k8s manifest
+      if: github.ref == 'refs/heads/main'
+      working-directory: k8s/overlays/dev
+      run: |
+        kustomize edit set image ${{ env.IMAGE }}
+    - name: Update imagetag in prod k8s manifest
+      if: github.ref == 'refs/heads/main'
+      working-directory: k8s/overlays/prod
+      run: |
+        kustomize edit set image ${{ env.IMAGE }}
+    - name: Commit tag changes
+      if: github.ref == 'refs/heads/main'
+      run: |
+        git config --global user.email ${{ github.actor }}@users.noreply.github.com
+        git config --global user.name ${{ github.actor }}
+        git add k8s/overlays
+        git commit -m "Updated image tag"
+        git push
