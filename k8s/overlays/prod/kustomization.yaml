@@ -3,3 +3,8 @@ resources:
 
 patches:
 - path: slack-channel-patch.yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+images:
+- name: europe-north1-docker.pkg.dev/knada-gcp/knada-north/expired-cert-notify
+  newTag: bfd8cb13702d638454a484a1052451d260cbf148
