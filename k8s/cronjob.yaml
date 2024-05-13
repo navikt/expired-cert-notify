@@ -1,0 +1,37 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: expired-cert-notify
+  namespace: knada-system
+spec:
+  schedule: "0 9 * * *"
+  ttlSecondsAfterFinished: 340
+  backoffLimit: 2
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: expired-cert-notify
+            image: europe-north1-docker.pkg.dev/knada-gcp/knada-north/expired-cert-notify
+            envFrom:
+              - secretRef:
+                  name: expired-cert-notify
+            env:
+              - name: CA_BUNDLE_PATH
+                value: /etc/pki/tls/certs/ca-bundle-crt
+              - name: SLACK_CHANNEL_ID
+                value: C06SBUR61JS
+          volumeMounts:
+          - mountPath: /etc/pki/tls/certs/ca-bundle.crt
+            name: ca-bundle-pem
+            readOnly: true
+            subPath: ca-bundle.pem
+        volumes:
+        - configMap:
+            defaultMode: 420
+            name: ca-bundle-pem
+          name: ca-bundle-pem
