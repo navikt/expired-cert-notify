@@ -2,7 +2,7 @@ apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: expired-cert-notify
-  namespace: knada-system
+  namespace: monitoring
 spec:
   schedule: "0 9 * * *"
   successfulJobsHistoryLimit: 1
