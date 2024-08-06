@@ -18,7 +18,7 @@ spec:
             image: europe-north1-docker.pkg.dev/knada-gcp/knada-north/expired-cert-notify
             envFrom:
               - secretRef:
-                  name: expired-cert-notify
+                  name: nadabot-slack-token
             env:
               - name: CA_BUNDLE_PATH
                 value: /etc/pki/tls/certs/ca-bundle.crt
