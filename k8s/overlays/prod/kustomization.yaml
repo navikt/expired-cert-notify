@@ -7,4 +7,4 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 images:
 - name: europe-north1-docker.pkg.dev/knada-gcp/knada-north/expired-cert-notify
-  newTag: d4342fa3df92407140e352aa89bd22e7877c203a
+  newTag: a44f016bb3350bb48bb0d833e94f41ff4ef6ed5b
