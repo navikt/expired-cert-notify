@@ -38,12 +38,12 @@ func main() {
 			continue
 		}
 
-		if expiredOrExpiresWithinAWeek(cert) {
+		if expires(cert) {
       logger.Error("expired or expiring cert", "cert", fmt.Sprintf("Issuer: %v, Subject: %v, NotAfter: %v", cert.Issuer, cert.Subject, cert.NotAfter))
 		}
 	}
 }
 
-func expiredOrExpiresWithinAWeek(cert *x509.Certificate) bool {
-	return math.Floor(cert.NotAfter.Sub(time.Now()).Hours()/24) < 7
+func expires(cert *x509.Certificate) bool {
+	return math.Floor(cert.NotAfter.Sub(time.Now()).Hours()/24) < 2
 }
