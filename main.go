@@ -42,7 +42,7 @@ func main() {
 		}
 
 		if expiredOrExpiresWithinAWeek(cert) {
-      logger.Error(fmt.Sprintf(
+      logger.Error("expired or expiring cert", "cert", fmt.Sprintf(
         "Issuer: %v, Subject: %v, NotAfter: %v",
         cert.Issuer, cert.Subject, cert.NotAfter
       ))
