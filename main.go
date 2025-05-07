@@ -9,8 +9,6 @@ import (
 	"math"
 	"os"
 	"time"
-
-	"github.com/slack-go/slack"
 )
 
 var caBundlePath, slackToken, slackChannel string
@@ -21,7 +19,6 @@ func main() {
 
 	logger := slog.New(slog.NewJSONHandler(os.Stdout, nil))
 
-	slackClient := slack.New(slackToken)
 	certs, err := os.ReadFile(caBundlePath)
 	if err != nil {
 		logger.Error("reading cabundle file", "path", caBundlePath, "error", err)
@@ -42,10 +39,7 @@ func main() {
 		}
 
 		if expiredOrExpiresWithinAWeek(cert) {
-      logger.Error("expired or expiring cert", "cert", fmt.Sprintf(
-        "Issuer: %v, Subject: %v, NotAfter: %v",
-        cert.Issuer, cert.Subject, cert.NotAfter
-      ))
+      logger.Error("expired or expiring cert", "cert", fmt.Sprintf("Issuer: %v, Subject: %v, NotAfter: %v", cert.Issuer, cert.Subject, cert.NotAfter))
 		}
 	}
 }
